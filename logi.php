@@ -120,12 +120,18 @@
 	// peab olema email ja parool
 	// ühtegi errorit
 	
+	/* siin */
 	if($signupEmailError == "" && //kontroll, et errorid on tühjad (loogiliselt võiks olla errorid pärast POSTe)
 		empty ($signupPasswordError) && empty ($signupFirstNameError) && empty ($signupLastNameError) &&
 		isset($_POST["signupEmail"])	&&
 		isset($_POST["signupPassword"]) &&
 		isset($_POST["signupFirstName"]) &&
-		isset($_POST["signupLastName"])
+		isset($_POST["signupLastName"]) &&
+		isset($_POST["signupSex"]) &&
+		empty ($signupSexError)
+		
+			*
+		
 			){
 			
 		//salvestame ab'i
@@ -141,7 +147,8 @@
 		//echo $serverUsername;
 		
 		//Kasutan funktsiooni
-		signUp($signupEmail, $password);
+		/* siin */
+		signUp($signupEmail, $password, $signupSex *);
 		
 	}
 	
