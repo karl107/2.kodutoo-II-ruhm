@@ -1,23 +1,20 @@
 <?php
-
 	require("../../config.php");
-
 	//see fail peab olema kõigil lehtedel kus tahan kasutada SESSION muutujat
 	session_start();
-
 	//SIGNUP
 	
 	/* siin */
-	function signUp ($email, $password, $signupSex *) {
+	function signUp ($email, $password, $signupDate, $signupFirstname, $signupLastName, $signupSex, $newsletter) {
 		
 		$database = "if16_karlkruu";
 		$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $database);
 		
-		$stmt=$mysqli->prepare("INSERT INTO user_sample (email, password) VALUES (?, ? *)");
+		$stmt=$mysqli->prepare("INSERT INTO user_data (email, password, birthday, firstname, lastname, sex, newsletter) VALUES (?, ?, ?, ?, ?, ?, ?)");
 		
 		echo $mysqli->error; 
 		
-		$stmt->bind_param("ss *", $email, $password *);
+		$stmt->bind_param("ssssssi", $email, $password, $signupDate, $signupFirstname, $signupLastname, $signupSex, $newsletter);
 		
 		if($stmt->execute()) {
 			
@@ -115,7 +112,6 @@
 		$mysqli->close();
 		
 	}
-
 	function getAllCars() {
 		$database = "if16_karlkruu";
 		$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $database);
@@ -303,6 +299,5 @@
 		
  	}
 	
-
 	
 	?>

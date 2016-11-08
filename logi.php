@@ -1,5 +1,4 @@
 <?php
-
 	
 	require("functions.php");
 	
@@ -13,7 +12,6 @@
 	}
 	
 	//echo hash("sha512", "karl");
-
 	//GET ja POSTI muutujad
 	// var_dump ($_GET);
 	// echo "<br>";
@@ -24,20 +22,23 @@
 	$loginEmail="";
 	$loginEmailError="";
 	$loginPasswordError="";
-
 	
 	$signupEmailError="";
 	$signupPasswordError="";
 	$signupFirstNameError="";
 	$signupLastNameError="";
 	$signupDateError="";
-	$termsAgreementError="";
+	$signupSexError="";
+	
 	$signupEmail="";
 	$signupSex="";
 	
+	
+	
 	$signupFirstName="";
 	$signupLastName="";
-	
+	$newsletter="";
+	$newsletterError="";
 	
 	if(isset($_POST["loginEmail"])){
 		if(empty($_POST["loginEmail"])){
@@ -65,7 +66,6 @@
 			
 			$signupEmailError= "E-postiaadress on sisestamata";
 		}else{
-
 			//email olemas
 			$signupEmail=$_POST["signupEmail"];
 		}
@@ -87,7 +87,6 @@
 			}
 		}
 	}
-
 	if(isset($_POST["signupFirstName"])){
 		
 		if(empty($_POST["signupFirstName"])){
@@ -122,15 +121,21 @@
 	
 	/* siin */
 	if($signupEmailError == "" && //kontroll, et errorid on tühjad (loogiliselt võiks olla errorid pärast POSTe)
-		empty ($signupPasswordError) && empty ($signupFirstNameError) && empty ($signupLastNameError) &&
+		empty ($signupPasswordError) &&
+		empty ($signupFirstNameError) &&
+		empty ($signupLastNameError) &&
+		empty ($newsletterError) &&
+		
+		
 		isset($_POST["signupEmail"])	&&
 		isset($_POST["signupPassword"]) &&
 		isset($_POST["signupFirstName"]) &&
 		isset($_POST["signupLastName"]) &&
 		isset($_POST["signupSex"]) &&
+		
 		empty ($signupSexError)
 		
-			*
+		
 		
 			){
 			
@@ -143,12 +148,11 @@
 		$password = hash("sha512", $_POST["signupPassword"]);
 		
 		echo "password hashed: ".$password. "<br>";
-
 		//echo $serverUsername;
 		
 		//Kasutan funktsiooni
 		/* siin */
-		signUp($signupEmail, $password, $signupSex *);
+		signUp($signupEmail, $password, $signupDate, $signupFirstName, $signupLastName, $signupSex, $newsletter);
 		
 	}
 	
@@ -210,7 +214,7 @@
 		
 		
 		<br><br>
-		<input type="checkbox" name="newsLetter" checked> Soovin uudiskirja
+		<input type="checkbox" name="newsletter" checked> Soovin uudiskirja
 		<br><br>
 		<input type="submit" value="Loo kasutaja">
 		
